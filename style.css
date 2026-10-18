@@ -296,3 +296,7 @@ details p{margin-top:12px;max-width:62ch}
 
 .chat-h .av{background:#fff;padding:6px}
 .chat-h .av img{display:block;height:100%;width:auto}
+
+.hero-grid{grid-template-columns:minmax(280px,470px) minmax(0,360px);justify-content:center;gap:clamp(32px,6vw,72px)}
+.hero-copy{justify-self:start;max-width:360px}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-copy{justify-self:stretch;max-width:none}}
