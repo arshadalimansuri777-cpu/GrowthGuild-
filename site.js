@@ -9,6 +9,7 @@
   var PAGES = [
     ["index.html", "Home", "home"],
     ["services.html", "Services", "services"],
+    ["pricing.html", "Pricing", "pricing"],
     ["community.html", "Community", "community"],
     ["content.html", "Content", "content"],
     ["about.html", "About", "about"]
