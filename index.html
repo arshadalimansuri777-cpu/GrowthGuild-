@@ -1,6 +1,9 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>GrowthGuild</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preload" as="image" href="logo-lockup.png">
+<link rel="preload" as="image" href="logo-icon.png">
+<link rel="preload" as="image" href="logo-full.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Sora:wght@500;600;700&display=swap">
@@ -32,7 +35,7 @@
         <div class="hero-copy">
           <p>GrowthGuild is a community and marketing team for founders and small business owners. Learn with peers, then let us build your website, run your ads and automate the busywork.</p>
           <div class="btn-row">
-            <a class="btn btn-light" href="community.html">Join Community</a>
+            <a class="btn btn-light" data-join href="community.html">Join Community</a>
             <a class="btn btn-ghost" data-ig href="#"><span data-icon="ig"></span>Instagram</a>
           </div>
         </div>
@@ -57,23 +60,23 @@
         <p>Five services under one roof, so your website, ads, content and follow-up all work together.</p>
       </div>
       <div class="bento">
-        <a class="bc b7" href="services.html">
+        <a class="bc b7" href="services.html#website">
           <div class="ill" data-ill="web"></div>
           <div class="tx"><h3>Website Making</h3><p>Fast, mobile-first websites that explain your offer and bring in enquiries.</p><span class="more">See details &rarr;</span></div>
         </a>
-        <a class="bc b5" href="services.html">
+        <a class="bc b5" href="services.html#meta-ads">
           <div class="ill" data-ill="meta"></div>
           <div class="tx"><h3>Meta Ads</h3><p>Facebook and Instagram campaigns built to bring in leads you can follow up.</p><span class="more">See details &rarr;</span></div>
         </a>
-        <a class="bc b4" href="services.html">
+        <a class="bc b4" href="services.html#ai-automation">
           <div class="ill" data-ill="ai"></div>
           <div class="tx"><h3>AI Automation</h3><p>Replies, follow-ups and lead sorting that run without you.</p><span class="more">See details &rarr;</span></div>
         </a>
-        <a class="bc b4" href="services.html">
+        <a class="bc b4" href="services.html#video-editing">
           <div class="ill" data-ill="video"></div>
           <div class="tx"><h3>Video Editing</h3><p>Reels and short videos with sharp hooks, captions and pacing.</p><span class="more">See details &rarr;</span></div>
         </a>
-        <a class="bc b4" href="services.html">
+        <a class="bc b4" href="services.html#social-media">
           <div class="ill" data-ill="social"></div>
           <div class="tx"><h3>Social Media Managing</h3><p>A steady content calendar, posting and replies, handled for you.</p><span class="more">See details &rarr;</span></div>
         </a>
@@ -115,12 +118,81 @@
           <div class="pr-bottom">
             <p class="pr-val">Total value <s>₹54,998/month + ₹24,999 setup</s></p>
             <p class="pr-price"><span class="pr-amt">₹39,999</span><span class="pr-unit">/month, setup FREE</span></p>
-            <span class="pr-save">You save ₹14,999/month + full setup fee</span>
+            <span class="pr-save">You save ₹14,999/month + setup FREE</span>
             <a class="btn btn-ghost btn-lg" href="https://wa.me/919921728033?text=Hi%2C%20I%20want%20the%20Growth%20Partner%20bundle.%20Please%20share%20details." target="_blank" rel="noopener">Get Growth Partner</a>
           </div>
         </article>
       </div>
       <div class="pr-more"><a class="btn btn-light btn-lg" href="pricing.html">View All Plans</a></div>
+    </div>
+  </section>
+
+  <section class="sec sec-tight" id="testimonials" style="scroll-margin-top:90px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Proof</span>
+        <h2>What clients say</h2>
+        <p>Real work, real words. More results are added as clients share them.</p>
+      </div>
+      <div class="proof-grid">
+        <figure class="card tcard">
+          <blockquote>&ldquo;GrowthGuild ne hamari website 7 din me bana di, aur pehle hafte se hi enquiries aane lagi.&rdquo;</blockquote>
+          <figcaption>
+            <!-- TODO: owner to replace with real content (client name + business) -->
+            <b>Client name, business</b>
+            <span class="tag">Website Growth plan</span>
+          </figcaption>
+        </figure>
+        <figure class="card tcard">
+          <blockquote>&ldquo;Reels aur ads ek hi team se chalne lage to leads double ho gaye, follow-up bhi system se hone laga.&rdquo;</blockquote>
+          <figcaption>
+            <!-- TODO: owner to replace with real content (client name + business) -->
+            <b>Client name, business</b>
+            <span class="tag">Growth Engine bundle</span>
+          </figcaption>
+        </figure>
+        <figure class="card tcard">
+          <blockquote>&ldquo;AI automation ne hamara daily follow-up kaam khatam kar diya. Ab koi lead miss nahi hoti.&rdquo;</blockquote>
+          <figcaption>
+            <!-- TODO: owner to replace with real content (client name + business) -->
+            <b>Client name, business</b>
+            <span class="tag">AI Automation</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-tight" id="work" style="scroll-margin-top:90px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Work</span>
+        <h2>Recent work</h2>
+        <p>Websites, ads, reels and automations we have actually shipped.</p>
+      </div>
+      <div class="proof-grid">
+        <article class="card wcard">
+          <div class="work-img"><span>Work sample - screenshot to be added</span></div>
+          <!-- TODO: owner to replace with real content (screenshot + result) -->
+          <h3>Local business website</h3>
+          <p class="w-svc">Website Growth plan</p>
+          <p class="w-res"><b>Result:</b> - <small>(to be added, e.g. enquiries per week)</small></p>
+        </article>
+        <article class="card wcard">
+          <div class="work-img"><span>Work sample - screenshot to be added</span></div>
+          <!-- TODO: owner to replace with real content (screenshot + result) -->
+          <h3>Instagram + Meta Ads</h3>
+          <p class="w-svc">Growth Engine bundle</p>
+          <p class="w-res"><b>Result:</b> - <small>(to be added, e.g. leads per month)</small></p>
+        </article>
+        <article class="card wcard">
+          <div class="work-img"><span>Work sample - screenshot to be added</span></div>
+          <!-- TODO: owner to replace with real content (screenshot + result) -->
+          <h3>WhatsApp automation</h3>
+          <p class="w-svc">AI Automation Business</p>
+          <p class="w-res"><b>Result:</b> - <small>(to be added, e.g. hours saved per week)</small></p>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -157,7 +229,8 @@
     <div class="wrap">
       <div class="split">
         <div class="phone-col">
-          <div class="phone">
+          <!-- TODO: owner to paste the Instagram embed code of the latest reel here to replace this link. Until then the phone links to the Instagram profile. -->
+          <a class="phone phone-link" data-ig href="#" aria-label="Watch the GrowthGuild reel on Instagram">
             <div class="screen">
               <div class="gridbg"></div>
               <div class="top"><span>Reels</span><span data-icon="ig"></span></div>
@@ -167,8 +240,8 @@
               <div class="cap"><b data-handle></b><span>Myth: you need a big budget to start with ads</span></div>
               <div class="rail"><span data-icon="heart"></span><span data-icon="comment"></span><span data-icon="send"></span></div>
             </div>
-          </div>
-          <span class="note">Illustration of a GrowthGuild reel</span>
+          </a>
+          <a class="note note-link" data-ig href="#">Watch the reel on Instagram</a>
         </div>
         <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">
           <span class="label">Follow along</span>
@@ -192,9 +265,10 @@
     <div class="wrap">
       <div class="stats-in">
         <div><b>5</b><span>Services</span></div>
+        <div><b>5-10</b><span>Community members</span></div>
+        <!-- TODO: owner to provide real project count, then replace the dash -->
+        <div><b>-</b><span>Projects delivered</span></div>
         <div><b>4</b><span>Content pillars</span></div>
-        <div><b>5</b><span>Content formats</span></div>
-        <div><b>1</b><span>WhatsApp community</span></div>
       </div>
     </div>
   </section>
@@ -214,6 +288,16 @@
     </div>
   </section>
 
+  <section class="sec sec-tight" id="faq">
+    <div class="wrap" style="max-width:860px">
+      <div class="sec-head"><span class="label">Questions</span><h2>Before you buy</h2></div>
+      <details><summary>Is ad spend included in the Meta Ads plans?</summary><p>No. Ad spend goes directly from you to Meta. Our fee covers setup, management and optimisation only.</p></details>
+      <details><summary>Can I start with a single service and upgrade to a bundle later?</summary><p>Yes. Most clients start with one service and move to a bundle. Your remaining period is adjusted in the bundle price.</p></details>
+      <details><summary>How do payments work?</summary><p>Projects: 50% advance to start, 50% on delivery. Monthly plans are prepaid at the start of each month.</p></details>
+      <details><summary>What if I do not like the work?</summary><p>Every plan carries a 7-day full refund guarantee within the first month. No questions asked.</p></details>
+    </div>
+  </section>
+
   <section class="sec sec-tight">
     <div class="wrap">
       <div class="join">
@@ -223,7 +307,7 @@
         <h2>Grow with people who are building too.</h2>
         <p>AI tools, marketing ideas and honest advice, all in one WhatsApp community.</p>
         <div class="btn-row" style="justify-content:center">
-          <a class="btn btn-grad btn-lg" href="community.html">Join Community</a>
+          <a class="btn btn-grad btn-lg" data-join href="community.html">Join Community</a>
           <a class="btn btn-ghost btn-lg" data-ig href="#"><span data-icon="ig"></span>Follow on Instagram</a>
         </div>
       </div>
@@ -232,6 +316,7 @@
 
   <div id="site-foot"></div>
 </div>
+<script src="supabase-config.js"></script>
 <script src="site.js"></script>
 
 </body></html>

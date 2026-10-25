@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>GrowthGuild Admin</title>
+<link rel="preload" as="image" href="logo-lockup.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Sora:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+.ad-login{max-width:420px;margin:clamp(40px,10vw,110px) auto;gap:16px}
+.ad-login form{display:flex;flex-direction:column;gap:14px}
+.ad-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:18px}
+.ad-tabs{display:flex;gap:8px}
+.ad-tabs .btn[aria-pressed="true"]{background:var(--grad);color:var(--ink);border-color:transparent}
+.ad-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ad-tools input{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);color:var(--fg);font:400 .9rem var(--body);width:min(100%,240px)}
+.ad-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:20px;background:var(--surface)}
+.ad-table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:640px}
+.ad-table th{position:sticky;top:0;text-align:left;padding:14px 16px;font:600 .72rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--orange);background:var(--surface2);white-space:nowrap}
+.ad-table td{padding:13px 16px;border-top:1px solid var(--line);color:var(--fg);vertical-align:top}
+.ad-table td.m{color:var(--muted);white-space:nowrap}
+.ad-table a{color:var(--orange)}
+.ad-empty{padding:32px;text-align:center;color:var(--muted)}
+.ad-count{color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="page" data-page="admin">
+  <div id="site-nav"></div>
+
+  <section class="sec" style="padding-top:24px" id="ad-login-sec">
+    <div class="wrap">
+      <div class="card ad-login">
+        <span class="label">Admin</span>
+        <h2 style="font-size:1.8rem">Admin login</h2>
+        <form id="ad-form" class="jm-form-like" novalidate>
+          <div class="jm-f"><label for="ad-user">Username (email)</label><input id="ad-user" type="email" autocomplete="username" required></div>
+          <div class="jm-f"><label for="ad-pass">Password</label><input id="ad-pass" type="password" autocomplete="current-password" required></div>
+          <p class="jm-msg bad" id="ad-err" role="alert"></p>
+          <button class="btn btn-grad btn-lg" id="ad-go" type="submit">Log in</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:24px" id="ad-panel" hidden>
+    <div class="wrap">
+      <div class="ad-bar">
+        <div><span class="label">Admin</span><h2 style="font-size:clamp(1.6rem,3vw,2.2rem)">Form submissions</h2></div>
+        <button class="btn btn-ghost btn-sm" id="ad-out" type="button">Log out</button>
+      </div>
+      <div class="ad-bar">
+        <div class="ad-tabs">
+          <button class="btn btn-ghost btn-sm" data-tab="community_members" aria-pressed="true" type="button">Community members</button>
+          <button class="btn btn-ghost btn-sm" data-tab="audit_requests" aria-pressed="false" type="button">Audit requests</button>
+        </div>
+        <div class="ad-tools">
+          <span class="ad-count" id="ad-count"></span>
+          <input id="ad-q" type="search" placeholder="Search..." aria-label="Search">
+          <button class="btn btn-ghost btn-sm" id="ad-refresh" type="button">Refresh</button>
+          <button class="btn btn-grad btn-sm" id="ad-csv" type="button">Download CSV</button>
+        </div>
+      </div>
+      <div class="ad-wrap"><table class="ad-table"><thead id="ad-head"></thead><tbody id="ad-body"></tbody></table><p class="ad-empty" id="ad-empty" hidden></p></div>
+    </div>
+  </section>
+
+  <div id="site-foot"></div>
+</div>
+<script src="supabase-config.js"></script>
+<script src="site.js"></script>
+<script>
+(function () {
+  var CFG = window.GG_SUPABASE, KEY = "gg_admin_session";
+  var COLS = {
+    community_members: [["created_at","Joined"],["name","Name"],["whatsapp_number","WhatsApp"],["role","I am a..."],["business","Business"],["source","Source"]],
+    audit_requests: [["created_at","Requested"],["name","Name"],["whatsapp_number","WhatsApp"],["business","Business"],["website","Website"]]
+  };
+  var tab = "community_members", rows = [], token = null;
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(v) { return String(v == null ? "" : v).replace(/[&<>"']/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  function fmt(v) { var d = new Date(v); return isNaN(d) ? "" : d.toLocaleString("en-IN", { timeZone: "Asia/Kolkata", day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }); }
+  function base() { return CFG.url.replace(/\/+$/, ""); }
+  function put(t) { token = t; try { if (t) sessionStorage.setItem(KEY, t); else sessionStorage.removeItem(KEY); } catch (e) {} }
+
+  function show(loggedIn) { $("ad-login-sec").hidden = loggedIn; $("ad-panel").hidden = !loggedIn; }
+  function logout() { put(null); rows = []; show(false); $("ad-pass").value = ""; }
+
+  function login(e) {
+    e.preventDefault();
+    var err = $("ad-err"), btn = $("ad-go");
+    err.textContent = "";
+    var u = $("ad-user").value.trim(), p = $("ad-pass").value;
+    if (!u || !p) { err.textContent = "Enter your username and password."; return; }
+    btn.disabled = true; btn.textContent = "Checking...";
+    fetch(base() + "/auth/v1/token?grant_type=password", {
+      method: "POST", headers: { "Content-Type": "application/json", apikey: CFG.anonKey },
+      body: JSON.stringify({ email: u, password: p })
+    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (r) {
+        if (!r.ok || !r.j.access_token) throw new Error("bad");
+        put(r.j.access_token); show(true); load();
+      })
+      .catch(function () { err.textContent = "Wrong username or password."; })
+      .then(function () { btn.disabled = false; btn.textContent = "Log in"; });
+  }
+
+  function load() {
+    $("ad-empty").hidden = true; $("ad-count").textContent = "Loading...";
+    fetch(base() + "/rest/v1/" + tab + "?select=*&order=created_at.desc", {
+      headers: { apikey: CFG.anonKey, Authorization: "Bearer " + token }
+    }).then(function (r) {
+      if (r.status === 401) { logout(); throw new Error("expired"); }
+      if (!r.ok) throw new Error("fail");
+      return r.json();
+    }).then(function (j) { rows = j; render(); })
+      .catch(function (e) {
+        if (e.message === "expired") return;
+        rows = []; render();
+        $("ad-empty").hidden = false;
+        $("ad-empty").textContent = "Could not load data. Check that the admin SQL was run in Supabase, then press Refresh.";
+      });
+  }
+
+  function filtered() {
+    var q = $("ad-q").value.trim().toLowerCase();
+    if (!q) return rows;
+    return rows.filter(function (r) { return JSON.stringify(r).toLowerCase().indexOf(q) !== -1; });
+  }
+
+  function render() {
+    var cols = COLS[tab], list = filtered();
+    $("ad-head").innerHTML = "<tr>" + cols.map(function (c) { return "<th>" + c[1] + "</th>"; }).join("") + "</tr>";
+    $("ad-body").innerHTML = list.map(function (r) {
+      return "<tr>" + cols.map(function (c) {
+        var v = r[c[0]];
+        if (c[0] === "created_at") return '<td class="m">' + esc(fmt(v)) + "</td>";
+        if (c[0] === "whatsapp_number" && v) return '<td><a href="https://wa.me/91' + esc(v) + '" target="_blank" rel="noopener">' + esc(v) + "</a></td>";
+        return "<td>" + esc(v) + "</td>";
+      }).join("") + "</tr>";
+    }).join("");
+    $("ad-count").textContent = list.length + (list.length === 1 ? " entry" : " entries");
+    if (!list.length) { $("ad-empty").hidden = false; $("ad-empty").textContent = rows.length ? "No matches." : "No entries yet."; }
+    else $("ad-empty").hidden = true;
+  }
+
+  function csv() {
+    var cols = COLS[tab], list = filtered();
+    var q = function (v) { v = String(v == null ? "" : v); if (/^[=+\-@]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; };
+    var out = [cols.map(function (c) { return q(c[1]); }).join(",")].concat(list.map(function (r) {
+      return cols.map(function (c) { return q(c[0] === "created_at" ? fmt(r[c[0]]) : r[c[0]]); }).join(",");
+    })).join("\r\n");
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob(["﻿" + out], { type: "text/csv" }));
+    a.download = tab + ".csv"; document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  $("ad-form").addEventListener("submit", login);
+  $("ad-out").addEventListener("click", logout);
+  $("ad-refresh").addEventListener("click", load);
+  $("ad-csv").addEventListener("click", csv);
+  $("ad-q").addEventListener("input", render);
+  Array.prototype.forEach.call(document.querySelectorAll("[data-tab]"), function (b) {
+    b.addEventListener("click", function () {
+      tab = b.getAttribute("data-tab");
+      Array.prototype.forEach.call(document.querySelectorAll("[data-tab]"), function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      rows = []; render(); load();
+    });
+  });
+  try { var t = sessionStorage.getItem(KEY); if (t) { token = t; show(true); load(); } } catch (e) {}
+})();
+</script>
+</body>
+</html>

@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>GrowthGuild About</title>
+<link rel="preload" as="image" href="logo-lockup.png">
+<link rel="preload" as="image" href="logo-icon.png">
+<link rel="preload" as="image" href="logo-full.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Sora:wght@500;600;700&display=swap">
@@ -25,7 +28,7 @@
           <h1>We build the community <span class="grad">before the agency.</span></h1>
           <p>GrowthGuild starts with people. Founders and small business owners learn together first, and services come after trust.</p>
           <div class="btn-row">
-            <a class="btn btn-grad btn-lg" href="community.html">Join Community</a>
+            <a class="btn btn-grad btn-lg" data-join href="community.html">Join Community</a>
             <a class="btn btn-ghost btn-lg" data-ig href="#"><span data-icon="ig"></span>Instagram</a>
           </div>
         </div>
@@ -77,11 +80,17 @@
 
   <section class="sec sec-tight">
     <div class="wrap">
-      <div class="card who" style="padding:clamp(24px,4vw,40px)">
-        <div class="avatar" aria-hidden="true">AM</div>
-        <div>
+      <div class="card who founder" style="padding:clamp(24px,4vw,40px)">
+        <div class="f-photo">
+          <span class="avatar" aria-hidden="true">AM</span>
+          <img src="assets/founder-arsad.jpg" alt="Arsad Mansuri, Founder of GrowthGuild" width="140" height="140" onerror="this.remove()">
+        </div>
+        <div class="f-text">
+          <span class="label">Founder</span>
           <h3>Arsad Mansuri</h3>
-          <p>Founder of GrowthGuild. Building the community in public from Maharashtra, India.</p>
+          <p class="f-role">Founder, GrowthGuild</p>
+          <p>Founder of GrowthGuild, building in public from Nashik, Maharashtra. GrowthGuild started as a community where founders learn growth together, and grew into a small team that builds websites, runs Meta ads, edits videos and automates the busywork. Plain language, honest pricing, and showing the work.</p>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/arshadmansuri07" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
     </div>
@@ -95,13 +104,14 @@
         <span class="label">Be early</span>
         <h2>Help shape GrowthGuild from the start.</h2>
         <p>Early members influence what we post and which services we focus on first.</p>
-        <a class="btn btn-grad btn-lg" href="community.html">Join Community</a>
+        <a class="btn btn-grad btn-lg" data-join href="community.html">Join Community</a>
       </div>
     </div>
   </section>
 
   <div id="site-foot"></div>
 </div>
+<script src="supabase-config.js"></script>
 <script src="site.js"></script>
 </body>
 </html>

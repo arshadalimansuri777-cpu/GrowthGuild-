@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>GrowthGuild Content</title>
+<link rel="preload" as="image" href="logo-lockup.png">
+<link rel="preload" as="image" href="logo-icon.png">
+<link rel="preload" as="image" href="logo-full.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Sora:wght@500;600;700&display=swap">
@@ -31,18 +34,19 @@
         </div>
         <div class="ph-visual">
           <div class="phone-col">
-            <div class="phone">
-              <div class="screen">
-                <div class="gridbg"></div>
-                <div class="top"><span>Reels</span><span data-icon="ig"></span></div>
-                <span class="daytag">Day 12</span>
-                <span class="big" data-icon="play"></span>
-                <div class="kw">Comment <b>GUIDE</b> and we will DM it to you</div>
-                <div class="cap"><b data-handle></b><span>Myth: you need a big budget to start with ads</span></div>
-                <div class="rail"><span data-icon="heart"></span><span data-icon="comment"></span><span data-icon="send"></span></div>
-              </div>
+<!-- TODO: owner to paste the Instagram embed code of the latest reel here to replace this link. Until then the phone links to the Instagram profile. -->
+          <a class="phone phone-link" data-ig href="#" aria-label="Watch the GrowthGuild reel on Instagram">
+            <div class="screen">
+              <div class="gridbg"></div>
+              <div class="top"><span>Reels</span><span data-icon="ig"></span></div>
+              <span class="daytag">Day 12</span>
+              <span class="big" data-icon="play"></span>
+              <div class="kw">Comment <b>GUIDE</b> and we will DM it to you</div>
+              <div class="cap"><b data-handle></b><span>Myth: you need a big budget to start with ads</span></div>
+              <div class="rail"><span data-icon="heart"></span><span data-icon="comment"></span><span data-icon="send"></span></div>
             </div>
-            <span class="note">Illustration of a GrowthGuild reel</span>
+          </a>
+          <a class="note note-link" data-ig href="#">Watch the reel on Instagram</a>
           </div>
         </div>
       </div>
@@ -99,13 +103,14 @@
         <span class="label">Go deeper</span>
         <h2>Get the full guides inside the community.</h2>
         <p>Reels are the short version. Members get the longer resources and can ask questions.</p>
-        <a class="btn btn-grad btn-lg" href="community.html">Join Community</a>
+        <a class="btn btn-grad btn-lg" data-join href="community.html">Join Community</a>
       </div>
     </div>
   </section>
 
   <div id="site-foot"></div>
 </div>
+<script src="supabase-config.js"></script>
 <script src="site.js"></script>
 </body>
 </html>

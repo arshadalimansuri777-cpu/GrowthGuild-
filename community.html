@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>GrowthGuild Community</title>
+<link rel="preload" as="image" href="logo-lockup.png">
+<link rel="preload" as="image" href="logo-icon.png">
+<link rel="preload" as="image" href="logo-full.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Sora:wght@500;600;700&display=swap">
@@ -25,10 +28,10 @@
           <h1>Solve problems with <span class="grad">other founders.</span></h1>
           <p>A WhatsApp community for founders and small business owners. Share what you are stuck on, learn what works and grow alongside people who are building too.</p>
           <div class="btn-row">
-            <a class="btn btn-grad btn-lg" data-join href="#"><span data-icon="wa"></span>Join on WhatsApp</a>
+            <a class="btn btn-grad btn-lg" data-join href="#join"><span data-icon="wa"></span>Join on WhatsApp</a>
             <a class="btn btn-ghost btn-lg" data-ig href="#"><span data-icon="ig"></span>Instagram</a>
           </div>
-          <p style="font-size:.85rem">The WhatsApp button opens in a new tab.</p>
+          <p style="font-size:.85rem">A short form comes first, then the WhatsApp invite opens in a new tab.</p>
         </div>
         <div class="ph-visual">
           <div style="width:100%">
@@ -90,7 +93,8 @@
           </a>
         </div>
         <div class="phone-col">
-          <div class="phone">
+<!-- TODO: owner to paste the Instagram embed code of the latest reel here to replace this link. Until then the phone links to the Instagram profile. -->
+          <a class="phone phone-link" data-ig href="#" aria-label="Watch the GrowthGuild reel on Instagram">
             <div class="screen">
               <div class="gridbg"></div>
               <div class="top"><span>Reels</span><span data-icon="ig"></span></div>
@@ -100,8 +104,8 @@
               <div class="cap"><b data-handle></b><span>Three AI tools every small business can use</span></div>
               <div class="rail"><span data-icon="heart"></span><span data-icon="comment"></span><span data-icon="send"></span></div>
             </div>
-          </div>
-          <span class="note">Illustration</span>
+          </a>
+          <a class="note note-link" data-ig href="#">Watch the reel on Instagram</a>
         </div>
       </div>
     </div>
@@ -136,13 +140,14 @@
         <span class="label">Ready</span>
         <h2>Join the Guild today.</h2>
         <p>Meet founders who are working on the same problems as you.</p>
-        <a class="btn btn-grad btn-lg" data-join href="#"><span data-icon="wa"></span>Join on WhatsApp</a>
+        <a class="btn btn-grad btn-lg" data-join href="#join"><span data-icon="wa"></span>Join on WhatsApp</a>
       </div>
     </div>
   </section>
 
   <div id="site-foot"></div>
 </div>
+<script src="supabase-config.js"></script>
 <script src="site.js"></script>
 </body>
 </html>

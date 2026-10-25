@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>GrowthGuild Services</title>
+<link rel="preload" as="image" href="logo-lockup.png">
+<link rel="preload" as="image" href="logo-icon.png">
+<link rel="preload" as="image" href="logo-full.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Sora:wght@500;600;700&display=swap">
@@ -25,7 +28,7 @@
           <h1>Five services. <span class="grad">One growth plan.</span></h1>
           <p>Websites, ads, automation, video and social media, built by one team so everything points the same way.</p>
           <div class="btn-row">
-            <a class="btn btn-grad btn-lg" href="community.html">Join Community</a>
+            <a class="btn btn-grad btn-lg" data-join href="community.html">Join Community</a>
             <a class="btn btn-ghost btn-lg" data-ig href="#"><span data-icon="ig"></span>Instagram</a>
           </div>
         </div>
@@ -42,7 +45,7 @@
   <section class="sec" style="padding-top:24px">
     <div class="wrap">
 
-      <div class="srow">
+      <div id="website" class="srow">
         <div class="s-vis"><div class="ill" data-ill="web"></div></div>
         <div class="s-txt">
           <span class="label">Service</span>
@@ -55,10 +58,11 @@
             <li>Fast loading on mobile</li>
           </ul>
           <div class="chips"><span class="chip">Landing page</span><span class="chip">Business site</span><span class="chip">Mobile first</span></div>
+          <a class="btn btn-grad s-cta" href="https://wa.me/919921728033?text=Hi%2C%20I%20want%20a%20website%20for%20my%20business.%20Please%20share%20details." target="_blank" rel="noopener"><span data-icon="wa"></span>Get started on WhatsApp</a>
         </div>
       </div>
 
-      <div class="srow rev">
+      <div id="meta-ads" class="srow rev">
         <div class="s-vis"><div class="ill" data-ill="meta"></div></div>
         <div class="s-txt">
           <span class="label">Service</span>
@@ -71,10 +75,11 @@
             <li>Ongoing optimisation</li>
           </ul>
           <div class="chips"><span class="chip">Lead generation</span><span class="chip">Retargeting</span><span class="chip">Reporting</span></div>
+          <a class="btn btn-grad s-cta" href="https://wa.me/919921728033?text=Hi%2C%20I%20want%20Meta%20Ads%20for%20my%20business.%20Please%20share%20details." target="_blank" rel="noopener"><span data-icon="wa"></span>Get started on WhatsApp</a>
         </div>
       </div>
 
-      <div class="srow">
+      <div id="ai-automation" class="srow">
         <div class="s-vis"><div class="ill" data-ill="ai"></div></div>
         <div class="s-txt">
           <span class="label">Service</span>
@@ -87,10 +92,11 @@
             <li>Reminders and follow-up messages</li>
           </ul>
           <div class="chips"><span class="chip">Comment-to-DM</span><span class="chip">AI replies</span><span class="chip">Follow-ups</span></div>
+          <a class="btn btn-grad s-cta" href="https://wa.me/919921728033?text=Hi%2C%20I%20want%20AI%20Automation%20for%20my%20business.%20Please%20share%20details." target="_blank" rel="noopener"><span data-icon="wa"></span>Get started on WhatsApp</a>
         </div>
       </div>
 
-      <div class="srow rev">
+      <div id="video-editing" class="srow rev">
         <div class="s-vis"><div class="ill" data-ill="video"></div></div>
         <div class="s-txt">
           <span class="label">Service</span>
@@ -103,10 +109,11 @@
             <li>Longer videos for YouTube</li>
           </ul>
           <div class="chips"><span class="chip">Reels</span><span class="chip">YouTube</span><span class="chip">Captions</span></div>
+          <a class="btn btn-grad s-cta" href="https://wa.me/919921728033?text=Hi%2C%20I%20want%20Video%20Editing%20for%20my%20business.%20Please%20share%20details." target="_blank" rel="noopener"><span data-icon="wa"></span>Get started on WhatsApp</a>
         </div>
       </div>
 
-      <div class="srow">
+      <div id="social-media" class="srow">
         <div class="s-vis"><div class="ill" data-ill="social"></div></div>
         <div class="s-txt">
           <span class="label">Service</span>
@@ -119,6 +126,7 @@
             <li>Regular performance review</li>
           </ul>
           <div class="chips"><span class="chip">Calendar</span><span class="chip">Posting</span><span class="chip">Reporting</span></div>
+          <a class="btn btn-grad s-cta" href="https://wa.me/919921728033?text=Hi%2C%20I%20want%20Social%20Media%20Management%20for%20my%20business.%20Please%20share%20details." target="_blank" rel="noopener"><span data-icon="wa"></span>Get started on WhatsApp</a>
         </div>
       </div>
 
@@ -145,13 +153,14 @@
         <span class="label">Start here</span>
         <h2>Join the community for first access.</h2>
         <p>Members hear about openings first and can ask questions before committing to anything.</p>
-        <a class="btn btn-grad btn-lg" href="community.html">Join Community</a>
+        <a class="btn btn-grad btn-lg" data-join href="community.html">Join Community</a>
       </div>
     </div>
   </section>
 
   <div id="site-foot"></div>
 </div>
+<script src="supabase-config.js"></script>
 <script src="site.js"></script>
 </body>
 </html>
