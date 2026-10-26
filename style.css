@@ -466,3 +466,15 @@ details p{margin-top:12px;max-width:62ch}
 .foot-bottom{position:relative;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding-bottom:max(28px,env(safe-area-inset-bottom,0px))}
 .foot-bottom small{padding-bottom:0}
 .foot-admin{background:rgba(10,9,13,.7)}
+
+/* Launch Offer price blocks */
+.lo{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
+.lo-label{font:700 .68rem/1 var(--body);letter-spacing:.16em;color:var(--orange)}
+.lo-old{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0;font-size:.95rem;color:var(--muted)}
+.lo-old s{text-decoration:line-through;text-decoration-thickness:1.5px;color:var(--muted)}
+.lo-badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#e5254b;color:#fff;font:700 .72rem/1 var(--body);letter-spacing:.04em;white-space:nowrap}
+.lo-line{margin:0;font-size:.85rem;line-height:1.45;color:var(--fg);overflow-wrap:anywhere}
+.lo-new .pr-amt{font-weight:800}
+.lo-new:not(.grad) .pr-amt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.pr-row .lo{grid-column:auto}
+@media (max-width:640px){.pr-row .lo{grid-column:1/-1}}
