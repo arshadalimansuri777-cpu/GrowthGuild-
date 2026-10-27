@@ -9,12 +9,11 @@
   var LOGO_SRC = "logo-lockup.png";
   var LOGO_FULL = "logo-full.png";
 
-  var FOUNDER_IMG = "assets/founder-arsad.jpg";
+  var FOUNDER_IMG = "arsadmansuri.png";
 
   var PAGES = [
     ["index.html", "Home", "home"],
-    ["services.html", "Services", "services"],
-    ["pricing.html", "Pricing", "pricing"],
+    ["services.html", 'Services <span class="soon">Soon</span>', "services"],
     ["community.html", "Community", "community"],
     ["content.html", "Content", "content"],
     ["about.html", "About", "about"]
@@ -157,7 +156,7 @@
     host.innerHTML =
       '<footer class="foot"><span class="wm" aria-hidden="true" style="font-size:clamp(3rem,13.5vw,12rem)">GROWTHGUILD</span><div class="wrap"><div class="foot-in">' +
       '<div><div class="foot-brand"><a class="logo-card" href="index.html" aria-label="GrowthGuild home"><img src="' + LOGO_FULL + '" alt="GrowthGuild, Built by Founders. For Founders." width="720" height="631"></a>' + founderThumb() + '</div>' +
-      '<p style="margin-top:16px;max-width:36ch">A community and marketing team for founders and small business owners.</p></div>' +
+      '<p style="margin-top:16px;max-width:36ch">A community for founders and small business owners.</p></div>' +
       '<div><h4>Pages</h4><div class="foot-links">' + links + "</div></div>" +
       '<div><h4>Connect</h4><div class="foot-links">' +
       '<a href="' + IG_URL + '" target="_blank" rel="noopener">' + ICONS.ig + IG_HANDLE + "</a>" +
