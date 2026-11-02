@@ -9,7 +9,7 @@
   var LOGO_SRC = "logo-lockup.png";
   var LOGO_FULL = "logo-full.png";
 
-  var FOUNDER_IMG = "assets/founder-arsad.jpg";
+  var FOUNDER_IMG = "founder-arsad.jpg";
 
   var PAGES = [
     ["index.html", "Home", "home"],
@@ -146,8 +146,7 @@
   }
 
   function founderThumb() {
-    return '<span class="f-thumb"><span class="avatar" aria-hidden="true">AM</span>' +
-      '<img src="' + FOUNDER_IMG + '" alt="Arsad Mansuri, Founder of GrowthGuild" width="64" height="64" loading="lazy" onerror="this.remove()"></span>';
+    return '<span class="f-thumb"><img src="' + FOUNDER_IMG + '" alt="Arsad Mansuri, Founder of GrowthGuild" width="64" height="64" loading="lazy"></span>';
   }
 
   function foot() {
