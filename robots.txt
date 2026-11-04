@@ -1,0 +1,6 @@
+# GrowthGuild - all search engines and AI search crawlers are welcome.
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+Sitemap: https://growthguild.in/sitemap.xml

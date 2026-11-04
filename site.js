@@ -152,11 +152,11 @@
   function foot() {
     var host = document.getElementById("site-foot");
     if (!host) return;
-    var links = PAGES.map(function (p) { return '<a href="' + p[0] + '">' + p[1] + "</a>"; }).join("");
+    var links = PAGES.map(function (p) { return '<a href="' + p[0] + '">' + p[1] + "</a>"; }).join("") + '<a href="website-design-nashik.html">Website Design Nashik</a>';
     host.innerHTML =
       '<footer class="foot"><span class="wm" aria-hidden="true" style="font-size:clamp(3rem,13.5vw,12rem)">GROWTHGUILD</span><div class="wrap"><div class="foot-in">' +
       '<div><div class="foot-brand"><a class="logo-card" href="index.html" aria-label="GrowthGuild home"><img src="' + LOGO_FULL + '" alt="GrowthGuild, Built by Founders. For Founders." width="720" height="631"></a>' + founderThumb() + '</div>' +
-      '<p style="margin-top:16px;max-width:36ch">A community and marketing team for founders and small business owners.</p></div>' +
+      '<p style="margin-top:16px;max-width:36ch">A website design agency and founder community based in Nashik, Maharashtra.</p></div>' +
       '<div><h4>Pages</h4><div class="foot-links">' + links + "</div></div>" +
       '<div><h4>Connect</h4><div class="foot-links">' +
       '<a href="' + IG_URL + '" target="_blank" rel="noopener">' + ICONS.ig + IG_HANDLE + "</a>" +

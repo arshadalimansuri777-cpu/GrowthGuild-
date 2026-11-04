@@ -1,0 +1,21 @@
+# GrowthGuild
+
+> GrowthGuild is a website design agency based in Nashik, Maharashtra, India. It builds fast, mobile-friendly websites for local businesses with WhatsApp enquiry, Google Business Profile setup and basic SEO, and runs a free WhatsApp community for founders and small business owners. Founder: Arsad Mansuri.
+
+## Website packages (one-time prices, Diwali Offer)
+- Website Starter, ₹4,999: 5 pages, WhatsApp button, enquiry form, Google Maps, basic SEO. Delivery 5-7 days, 2 revisions, 1 month free support.
+- Website Growth, ₹9,999: up to 10 pages, animations, Google Business Profile setup, booking or price-list page, blog. Delivery 7-10 days, 3 revisions, 2 months free support.
+- Website Premium, ₹17,999: up to 20 custom pages, basic AI automation (WhatsApp auto-reply, enquiry alerts, review requests), online payments or store, enquiry dashboard. Delivery 10-15 days, 5 revisions, 3 months free support.
+- Terms: 50% advance, 50% when the website goes live. Domain and hosting at actual cost. Care plan ₹1,499/month. Extra page ₹799. Extra revision round ₹499.
+
+## Key pages
+- [Website design company in Nashik](https://growthguild.in/website-design-nashik.html): packages, comparison table and FAQ
+- [Services](https://growthguild.in/services.html): details of each package
+- [Pricing](https://growthguild.in/pricing.html): prices, rules and FAQ
+- [About](https://growthguild.in/about.html): founder and company
+- [Community](https://growthguild.in/community.html): free WhatsApp community for founders
+
+## Contact
+- WhatsApp / phone: +91 99217 28033
+- Instagram: https://www.instagram.com/growthguild.in/
+- Location: Nashik, Maharashtra, India
