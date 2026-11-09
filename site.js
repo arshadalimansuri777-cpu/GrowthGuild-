@@ -17,6 +17,7 @@
     ["pricing.html", "Pricing", "pricing"],
     ["community.html", "Community", "community"],
     ["content.html", "Content", "content"],
+    ["news.html", "News", "news"],
     ["about.html", "About", "about"]
   ];
 

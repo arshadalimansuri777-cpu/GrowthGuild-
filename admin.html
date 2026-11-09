@@ -26,6 +26,20 @@
 .ad-table a{color:var(--orange)}
 .ad-empty{padding:32px;text-align:center;color:var(--muted)}
 .ad-count{color:var(--muted);font-size:.9rem}
+.ad-banner{margin-bottom:16px;padding:14px 18px;border-radius:14px;border:1px solid rgba(255,138,138,.5);background:rgba(255,107,107,.08);color:#ffb3b3;font-size:.92rem}
+.ad-banner code{background:rgba(255,255,255,.1);padding:1px 6px;border-radius:6px;color:var(--fg)}
+.ad-who{color:var(--muted);font-size:.85rem}
+.ad-act{display:flex;gap:8px;flex-wrap:wrap}
+.ad-ed{display:grid;gap:14px;padding:24px;border:1px solid var(--line);border-radius:20px;background:var(--surface);margin-bottom:18px}
+.ad-ed .row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.ad-ed textarea{width:100%;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);color:var(--fg);font:400 .95rem/1.55 var(--body);resize:vertical}
+.ad-ed textarea:focus{outline:2px solid var(--orange);outline-offset:1px}
+.ad-ed .hint{font-size:.8rem;color:var(--muted)}
+.ad-ed .chk{flex-direction:row;align-items:center;gap:10px}
+.ad-ed .chk input{width:auto;min-height:0}
+.ad-ed .jm-f input[type=datetime-local]{color-scheme:dark}
+.ad-pill{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;border:1px solid var(--line)}
+.ad-pill.on{color:#4ade80;border-color:rgba(74,222,128,.4)}
 </style>
 </head>
 <body>
@@ -50,21 +64,46 @@
   <section class="sec" style="padding-top:24px" id="ad-panel" hidden>
     <div class="wrap">
       <div class="ad-bar">
-        <div><span class="label">Admin</span><h2 style="font-size:clamp(1.6rem,3vw,2.2rem)">Form submissions</h2></div>
+        <div><span class="label">Admin</span><h2 style="font-size:clamp(1.6rem,3vw,2.2rem)">Dashboard</h2><span class="ad-who" id="ad-who"></span></div>
         <button class="btn btn-ghost btn-sm" id="ad-out" type="button">Log out</button>
       </div>
       <div class="ad-bar">
         <div class="ad-tabs">
           <button class="btn btn-ghost btn-sm" data-tab="community_members" aria-pressed="true" type="button">Community members</button>
           <button class="btn btn-ghost btn-sm" data-tab="audit_requests" aria-pressed="false" type="button">Audit requests</button>
+          <button class="btn btn-ghost btn-sm" data-tab="news_posts" aria-pressed="false" type="button">News</button>
         </div>
         <div class="ad-tools">
           <span class="ad-count" id="ad-count"></span>
           <input id="ad-q" type="search" placeholder="Search..." aria-label="Search">
           <button class="btn btn-ghost btn-sm" id="ad-refresh" type="button">Refresh</button>
           <button class="btn btn-grad btn-sm" id="ad-csv" type="button">Download CSV</button>
+          <button class="btn btn-grad btn-sm" id="ad-new" type="button" hidden>+ New post</button>
         </div>
       </div>
+      <div class="ad-banner" id="ad-banner" role="alert" hidden></div>
+      <form class="ad-ed" id="ad-ed" hidden novalidate>
+        <h3 id="ed-h" style="font-size:1.3rem">New post</h3>
+        <div class="jm-f"><label for="ed-title">Title <em>(this becomes the Google headline)</em></label><input id="ed-title" type="text" maxlength="120" required></div>
+        <div class="row2">
+          <div class="jm-f"><label for="ed-slug">URL slug</label><input id="ed-slug" type="text" maxlength="90" placeholder="auto-from-title"><span class="hint" id="ed-url"></span></div>
+          <div class="jm-f"><label for="ed-cat">Category</label><select id="ed-cat"><option>Update</option><option>Offer</option><option>SEO</option><option>Website</option><option>Google Business Profile</option><option>WhatsApp</option><option>Community</option></select></div>
+        </div>
+        <div class="jm-f"><label for="ed-ex">Short summary <em>(shown on cards and as the Google description)</em></label><input id="ed-ex" type="text" maxlength="200"><span class="hint" id="ed-exc"></span></div>
+        <div class="jm-f"><label for="ed-cover">Cover image URL <em>(optional, https link or a file like /og-image.png)</em></label><input id="ed-cover" type="text"></div>
+        <div class="jm-f"><label for="ed-body">Post</label><textarea id="ed-body" rows="14" required></textarea>
+          <span class="hint">Write normally. Blank line = new paragraph. <code>## Heading</code>, <code>- bullet</code>, <code>**bold**</code>, <code>[link text](https://...)</code>, <code>![alt text](image-url)</code>.</span></div>
+        <div class="row2">
+          <div class="jm-f"><label for="ed-mt">SEO title <em>(optional, up to 60 characters)</em></label><input id="ed-mt" type="text" maxlength="70"></div>
+          <div class="jm-f"><label for="ed-md">SEO description <em>(optional, up to 155)</em></label><input id="ed-md" type="text" maxlength="170"></div>
+        </div>
+        <div class="row2">
+          <div class="jm-f"><label for="ed-date">Publish date</label><input id="ed-date" type="datetime-local"></div>
+          <div class="jm-f chk" style="justify-content:flex-end"><label><input id="ed-pub" type="checkbox"> Published (visible on the website)</label></div>
+        </div>
+        <p class="jm-msg" id="ed-msg" role="status"></p>
+        <div class="btn-row"><button class="btn btn-grad" id="ed-save" type="submit">Save post</button><button class="btn btn-ghost" id="ed-cancel" type="button">Cancel</button></div>
+      </form>
       <div class="ad-wrap"><table class="ad-table"><thead id="ad-head"></thead><tbody id="ad-body"></tbody></table><p class="ad-empty" id="ad-empty" hidden></p></div>
     </div>
   </section>
@@ -75,20 +114,54 @@
 <script src="site.js"></script>
 <script>
 (function () {
-  var CFG = window.GG_SUPABASE, KEY = "gg_admin_session";
+  var CFG = window.GG_SUPABASE, KEY = "gg_admin_session", RKEY = "gg_admin_refresh";
   var COLS = {
     community_members: [["created_at","Joined"],["name","Name"],["whatsapp_number","WhatsApp"],["role","I am a..."],["business","Business"],["source","Source"]],
-    audit_requests: [["created_at","Requested"],["name","Name"],["whatsapp_number","WhatsApp"],["business","Business"],["website","Website"]]
+    audit_requests: [["created_at","Requested"],["name","Name"],["whatsapp_number","WhatsApp"],["business","Business"],["website","Website"]],
+    news_posts: [["published_at","Date"],["title","Title"],["category","Category"],["published","Status"],["_actions","Actions"]]
   };
-  var tab = "community_members", rows = [], token = null;
+  var tab = "community_members", rows = [], token = null, refresh = null, editing = null;
   var $ = function (id) { return document.getElementById(id); };
   function esc(v) { return String(v == null ? "" : v).replace(/[&<>"']/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
   function fmt(v) { var d = new Date(v); return isNaN(d) ? "" : d.toLocaleString("en-IN", { timeZone: "Asia/Kolkata", day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }); }
   function base() { return CFG.url.replace(/\/+$/, ""); }
-  function put(t) { token = t; try { if (t) sessionStorage.setItem(KEY, t); else sessionStorage.removeItem(KEY); } catch (e) {} }
+  function put(t, r) { token = t; refresh = r || null; try { if (t) { sessionStorage.setItem(KEY, t); if (r) sessionStorage.setItem(RKEY, r); } else { sessionStorage.removeItem(KEY); sessionStorage.removeItem(RKEY); } } catch (e) {} }
+  function emailOf(t) { try { return JSON.parse(atob(t.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))).email || ""; } catch (e) { return ""; } }
+  function banner(html) { $("ad-banner").hidden = !html; $("ad-banner").innerHTML = html || ""; }
 
-  function show(loggedIn) { $("ad-login-sec").hidden = loggedIn; $("ad-panel").hidden = !loggedIn; }
-  function logout() { put(null); rows = []; show(false); $("ad-pass").value = ""; }
+  function show(loggedIn) { $("ad-login-sec").hidden = loggedIn; $("ad-panel").hidden = !loggedIn; if (loggedIn) $("ad-who").textContent = "Logged in as " + emailOf(token); }
+  function logout() { put(null); rows = []; show(false); banner(""); $("ad-pass").value = ""; }
+
+  // Every database call goes through here: adds the login token, and quietly renews it once if it expired.
+  function call(path, opts, retried) {
+    opts = opts || {};
+    var h = Object.assign({ apikey: CFG.anonKey, Authorization: "Bearer " + token }, opts.headers || {});
+    return fetch(base() + "/rest/v1/" + path, { method: opts.method || "GET", headers: h, body: opts.body }).then(function (r) {
+      if (r.status === 401 && !retried && refresh) {
+        return fetch(base() + "/auth/v1/token?grant_type=refresh_token", { method: "POST", headers: { "Content-Type": "application/json", apikey: CFG.anonKey }, body: JSON.stringify({ refresh_token: refresh }) })
+          .then(function (x) { return x.json().then(function (j) { if (!x.ok || !j.access_token) throw new Error("expired"); put(j.access_token, j.refresh_token); return call(path, opts, true); }); });
+      }
+      if (r.status === 401) { logout(); throw new Error("expired"); }
+      return r;
+    });
+  }
+  function problem(r) { // turn a failed response into a plain-English message
+    return r.text().then(function (t) {
+      var m = ""; try { var j = JSON.parse(t); m = j.message || j.hint || ""; } catch (e) { m = t.slice(0, 160); }
+      if (r.status === 404 || /does not exist|schema cache/i.test(m)) return "Table or function missing (" + r.status + "). Run the latest <code>supabase-admin.sql</code> in Supabase > SQL Editor.";
+      if (r.status === 403 || /permission denied|row-level security/i.test(m)) return "Permission denied (" + r.status + "). Your login email is not in the admin list. Run <code>supabase-admin.sql</code> with your email added.";
+      return "Error " + r.status + ": " + esc(m || "unknown");
+    });
+  }
+  function checkAdmin() {
+    return call("rpc/is_admin", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" }).then(function (r) {
+      if (!r.ok) return problem(r).then(function (m) { banner(m); });
+      return r.json().then(function (ok) {
+        if (ok !== true) banner("You are logged in as <code>" + esc(emailOf(token)) + "</code>, but this email is not an admin, so Supabase hides all data. In Supabase > SQL Editor, add it to the list at the top of <code>supabase-admin.sql</code> and run the file again.");
+        else banner("");
+      });
+    }).catch(function () {});
+  }
 
   function login(e) {
     e.preventDefault();
@@ -103,7 +176,7 @@
     }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
       .then(function (r) {
         if (!r.ok || !r.j.access_token) throw new Error("bad");
-        put(r.j.access_token); show(true); load();
+        put(r.j.access_token, r.j.refresh_token); show(true); checkAdmin(); load();
       })
       .catch(function () { err.textContent = "Wrong username or password."; })
       .then(function () { btn.disabled = false; btn.textContent = "Log in"; });
@@ -111,18 +184,16 @@
 
   function load() {
     $("ad-empty").hidden = true; $("ad-count").textContent = "Loading...";
-    fetch(base() + "/rest/v1/" + tab + "?select=*&order=created_at.desc", {
-      headers: { apikey: CFG.anonKey, Authorization: "Bearer " + token }
-    }).then(function (r) {
-      if (r.status === 401) { logout(); throw new Error("expired"); }
-      if (!r.ok) throw new Error("fail");
+    var order = tab === "news_posts" ? "published_at.desc" : "created_at.desc";
+    call(tab + "?select=*&order=" + order).then(function (r) {
+      if (!r.ok) return problem(r).then(function (m) { throw new Error(m); });
       return r.json();
     }).then(function (j) { rows = j; render(); })
       .catch(function (e) {
         if (e.message === "expired") return;
         rows = []; render();
         $("ad-empty").hidden = false;
-        $("ad-empty").textContent = "Could not load data. Check that the admin SQL was run in Supabase, then press Refresh.";
+        $("ad-empty").innerHTML = e.message && e.message.length > 12 ? e.message : "Could not load data. Check your internet and press Refresh.";
       });
   }
 
@@ -133,18 +204,23 @@
   }
 
   function render() {
-    var cols = COLS[tab], list = filtered();
+    var cols = COLS[tab], list = filtered(), news = tab === "news_posts";
+    $("ad-csv").hidden = news; $("ad-new").hidden = !news; if (!news) $("ad-ed").hidden = true;
     $("ad-head").innerHTML = "<tr>" + cols.map(function (c) { return "<th>" + c[1] + "</th>"; }).join("") + "</tr>";
     $("ad-body").innerHTML = list.map(function (r) {
       return "<tr>" + cols.map(function (c) {
         var v = r[c[0]];
-        if (c[0] === "created_at") return '<td class="m">' + esc(fmt(v)) + "</td>";
+        if (c[0] === "created_at" || c[0] === "published_at") return '<td class="m">' + esc(fmt(v)) + "</td>";
+        if (c[0] === "published") return '<td><span class="ad-pill' + (v ? " on" : "") + '">' + (v ? "Live" : "Draft") + "</span></td>";
+        if (c[0] === "_actions") return '<td><div class="ad-act"><button class="btn btn-ghost btn-sm" data-edit="' + esc(r.id) + '" type="button">Edit</button>' +
+          (r.published ? '<a class="btn btn-ghost btn-sm" href="/news/' + encodeURIComponent(r.slug) + '" target="_blank" rel="noopener">View</a>' : "") +
+          '<button class="btn btn-ghost btn-sm" data-del="' + esc(r.id) + '" type="button">Delete</button></div></td>';
         if (c[0] === "whatsapp_number" && v) return '<td><a href="https://wa.me/91' + esc(v) + '" target="_blank" rel="noopener">' + esc(v) + "</a></td>";
         return "<td>" + esc(v) + "</td>";
       }).join("") + "</tr>";
     }).join("");
-    $("ad-count").textContent = list.length + (list.length === 1 ? " entry" : " entries");
-    if (!list.length) { $("ad-empty").hidden = false; $("ad-empty").textContent = rows.length ? "No matches." : "No entries yet."; }
+    $("ad-count").textContent = list.length + (list.length === 1 ? (news ? " post" : " entry") : (news ? " posts" : " entries"));
+    if (!list.length) { $("ad-empty").hidden = false; $("ad-empty").textContent = rows.length ? "No matches." : (news ? "No posts yet. Press + New post." : "No entries yet."); }
     else $("ad-empty").hidden = true;
   }
 
@@ -159,19 +235,82 @@
     a.download = tab + ".csv"; document.body.appendChild(a); a.click(); a.remove();
   }
 
+  /* ---------- News editor ---------- */
+  function slugify(t) { return String(t).toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80); }
+  function localIso(d) { var x = new Date(d || Date.now()); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0, 16); }
+  function hints() {
+    $("ed-url").textContent = "growthguild.in/news/" + ($("ed-slug").value || slugify($("ed-title").value) || "your-post");
+    $("ed-exc").textContent = $("ed-ex").value.length + " / 155 characters is ideal";
+  }
+  function openEditor(r) {
+    editing = r || null;
+    $("ed-h").textContent = r ? "Edit post" : "New post";
+    $("ed-title").value = r ? r.title : ""; $("ed-slug").value = r ? r.slug : "";
+    $("ed-cat").value = r && r.category ? r.category : "Update";
+    $("ed-ex").value = r ? r.excerpt || "" : ""; $("ed-cover").value = r ? r.cover_url || "" : "";
+    $("ed-body").value = r ? r.body || "" : ""; $("ed-mt").value = r ? r.meta_title || "" : ""; $("ed-md").value = r ? r.meta_description || "" : "";
+    $("ed-date").value = localIso(r ? r.published_at : null); $("ed-pub").checked = r ? !!r.published : true;
+    $("ed-msg").textContent = ""; $("ed-msg").className = "jm-msg";
+    hints(); $("ad-ed").hidden = false; $("ed-title").focus(); $("ad-ed").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function savePost(e) {
+    e.preventDefault();
+    var msg = $("ed-msg"), btn = $("ed-save"), title = $("ed-title").value.trim(), body = $("ed-body").value.trim();
+    msg.className = "jm-msg bad";
+    if (!title || !body) { msg.textContent = "Title and post text are required."; return; }
+    var slug = slugify($("ed-slug").value || title);
+    if (!slug) { msg.textContent = "Slug needs letters or numbers."; return; }
+    var cover = $("ed-cover").value.trim();
+    if (cover && !/^(https:\/\/|\/)/.test(cover)) { msg.textContent = "Cover image must start with https:// or /"; return; }
+    var rec = { title: title, slug: slug, category: $("ed-cat").value, excerpt: $("ed-ex").value.trim() || null, cover_url: cover || null, body: body,
+      meta_title: $("ed-mt").value.trim() || null, meta_description: $("ed-md").value.trim() || null,
+      published: $("ed-pub").checked, published_at: new Date($("ed-date").value || Date.now()).toISOString() };
+    btn.disabled = true; btn.textContent = "Saving...";
+    var path = "news_posts" + (editing ? "?id=eq." + encodeURIComponent(editing.id) : "");
+    call(path, { method: editing ? "PATCH" : "POST", headers: { "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify(rec) })
+      .then(function (r) {
+        if (!r.ok) return problem(r).then(function (m) { throw new Error(/duplicate key|23505/.test(m) ? "That slug is already used by another post. Change the URL slug." : m); });
+        return r.json();
+      }).then(function (j) {
+        if (!j.length) throw new Error("Not saved. Your login is not an admin. Run supabase-admin.sql with your email.");
+        $("ad-ed").hidden = true; load();
+      }).catch(function (er) { if (er.message !== "expired") { msg.innerHTML = er.message; } })
+      .then(function () { btn.disabled = false; btn.textContent = "Save post"; });
+  }
+  function delPost(id) {
+    var r = rows.filter(function (x) { return x.id === id; })[0];
+    if (!r || !confirm('Delete "' + r.title + '" permanently?')) return;
+    call("news_posts?id=eq." + encodeURIComponent(id), { method: "DELETE", headers: { Prefer: "return=representation" } })
+      .then(function (x) { if (!x.ok) return problem(x).then(function (m) { throw new Error(m); }); return x.json(); })
+      .then(function (j) { if (!j.length) alert("Not deleted. Your login is not an admin."); load(); })
+      .catch(function (er) { if (er.message !== "expired") banner(er.message); });
+  }
+
   $("ad-form").addEventListener("submit", login);
   $("ad-out").addEventListener("click", logout);
-  $("ad-refresh").addEventListener("click", load);
+  $("ad-refresh").addEventListener("click", function () { checkAdmin(); load(); });
   $("ad-csv").addEventListener("click", csv);
   $("ad-q").addEventListener("input", render);
+  $("ad-new").addEventListener("click", function () { openEditor(null); });
+  $("ad-ed").addEventListener("submit", savePost);
+  $("ed-cancel").addEventListener("click", function () { $("ad-ed").hidden = true; });
+  $("ed-title").addEventListener("input", function () { if (!editing && !$("ed-slug").dataset.manual) $("ed-slug").value = slugify($("ed-title").value); hints(); });
+  $("ed-slug").addEventListener("input", function () { $("ed-slug").dataset.manual = "1"; hints(); });
+  $("ed-ex").addEventListener("input", hints);
+  $("ad-body").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    var id = b.getAttribute("data-edit") || b.getAttribute("data-del");
+    if (b.hasAttribute("data-edit")) openEditor(rows.filter(function (x) { return x.id === id; })[0]);
+    else if (b.hasAttribute("data-del")) delPost(id);
+  });
   Array.prototype.forEach.call(document.querySelectorAll("[data-tab]"), function (b) {
     b.addEventListener("click", function () {
       tab = b.getAttribute("data-tab");
       Array.prototype.forEach.call(document.querySelectorAll("[data-tab]"), function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
-      rows = []; render(); load();
+      rows = []; $("ad-q").value = ""; render(); load();
     });
   });
-  try { var t = sessionStorage.getItem(KEY); if (t) { token = t; show(true); load(); } } catch (e) {}
+  try { var t = sessionStorage.getItem(KEY); if (t) { token = t; refresh = sessionStorage.getItem(RKEY); show(true); checkAdmin(); load(); } } catch (e) {}
 })();
 </script>
 </body>
